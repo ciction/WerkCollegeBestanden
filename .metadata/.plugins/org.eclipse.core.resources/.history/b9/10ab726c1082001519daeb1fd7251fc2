@@ -1,0 +1,132 @@
+package SoftwareProject;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SpringLayout;
+
+public class ScrollableTest {
+
+	//entry point
+	public static void main(String args[]){
+		System.out.println("ScrollableTest start");
+		ScrollableTest test = new ScrollableTest();
+	}
+
+	//-------------------------------------------
+	
+	//		HET PROBLEEM --> de Jpanel met springlayout 	 			(panelInsideScrollPane)
+	//		van grootte doen veranderen
+	//		op basis van het aantal componenten binnenin de JPanel
+
+	//		zie actionlistener van de button 							(binnenin de constructor LIJN 81)
+	
+	//---------------------------------------
+	
+	//window
+	JFrame frame;
+	
+	//panels
+	JScrollPane myScrollPane;
+	JPanel panelInsideScrollPane;
+	
+	//components
+	JButton buttonTest;
+	
+	//used to store last created component;
+	JComponent lastCreatedComponent;
+	
+	
+	SpringLayout layout;
+	
+	//Constructor
+	public ScrollableTest() {
+		
+		//create window
+		createWindow();
+		
+		//create panels
+		createPanels();
+	    
+		//set size for the inner panel larger then the scrollpane --> scorllbar becomes visible
+		panelInsideScrollPane.setPreferredSize(new Dimension(300,320));
+		myScrollPane.setPreferredSize(new Dimension(300,300));
+
+		
+	   
+		//add button
+		buttonTest = new JButton("add component");
+		panelInsideScrollPane.add(buttonTest);
+		
+		lastCreatedComponent = buttonTest;
+		
+		//button interaction
+		buttonTest.addActionListener(new ActionListener() {
+			
+			//when clicked
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//create new label
+				JLabel newElement = new JLabel("Bla");
+            	layout.putConstraint(SpringLayout.NORTH, newElement,25,SpringLayout.SOUTH, lastCreatedComponent);
+            	lastCreatedComponent = newElement;
+            	
+            	
+            	//------------>TRY TO RESIZE THE INNER JPANEL <-----------
+            	panelInsideScrollPane.doLayout();
+            	panelInsideScrollPane.setSize(panelInsideScrollPane.getPreferredSize());
+            	panelInsideScrollPane.setPreferredSize(
+            			new Dimension(
+            			panelInsideScrollPane.getPreferredSize().width,
+            			(panelInsideScrollPane.getPreferredSize().height + 5)));
+            	
+            	myScrollPane.setSize(frame.getPreferredSize());
+            	frame.pack();
+            	width
+            	//------------------------------------------------------------------
+            	
+            	//add label to the inner pannel (pannel within the scrollpane)
+               	panelInsideScrollPane.add(newElement);
+            	panelInsideScrollPane.validate();
+            	panelInsideScrollPane.repaint();
+				
+			}
+		});
+
+
+	    
+	    
+	    //show window
+	    frame.setVisible(true);
+		
+	}
+	public void createWindow(){
+		
+		frame = new JFrame("Test");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(300, 300);
+	}
+	
+	public void createPanels(){
+		//create scrollpane
+	    myScrollPane = new JScrollPane();
+	    
+	    //create  panel with spring layout(for inside the scrollpane)
+	    panelInsideScrollPane = new JPanel();
+	    layout = new SpringLayout();
+		panelInsideScrollPane.setLayout(layout);
+	    
+		//add panel to the scrollpane
+		myScrollPane.setViewportView(panelInsideScrollPane);
+		
+	    //add scrollpane to window
+		frame.add(myScrollPane);
+	}
+}

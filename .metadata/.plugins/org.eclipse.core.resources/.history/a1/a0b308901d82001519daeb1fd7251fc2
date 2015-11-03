@@ -1,0 +1,9 @@
+package werkCollege6;
+
+import java.util.Date;
+
+public abstract class Passagier {
+	private String naam;
+	private Date opstartDatumDossier;
+
+}

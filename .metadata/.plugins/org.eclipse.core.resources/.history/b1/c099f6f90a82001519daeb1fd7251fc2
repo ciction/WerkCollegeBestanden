@@ -1,0 +1,41 @@
+package SoftwareProject;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
+public class ScrollableTest {
+
+	//entry point
+	public static void main(String args[]){
+		System.out.println("ScrollableTest start");
+		ScrollableTest test = new ScrollableTest();
+	}
+
+	//-------------------------------------------
+	
+	
+	
+	JFrame frame;
+	JScrollPane scroll;
+	
+	//Constructor
+	public ScrollableTest() {
+		
+		//create frame
+		frame = new JFrame("Test");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(500, 600);
+	 
+	    
+	    //create scrollpane
+	    scroll = new JScrollPane();
+	    
+	    //add scrollpane to window
+	    
+	    
+	    //show window
+	    frame.setVisible(true);
+		
+	}
+	
+}

@@ -1,0 +1,28 @@
+package SoftwareProject;
+
+import javax.swing.JFrame;
+
+public class ScrollableTest {
+
+	//entry point
+	public static void main(String args[]){
+		System.out.println("ScrollableTest start");
+		ScrollableTest test = new ScrollableTest();
+	}
+
+	//-------------------------------------------
+	
+	
+	
+	final JFrame frame;
+	
+	//Constructor
+	public ScrollableTest() {
+		
+		frame = new JFrame("Test");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(500, 600);
+		
+	}
+	
+}

@@ -1,0 +1,7 @@
+package werkCollege6;
+
+public abstract class Passagier {
+	private String naam;
+	private Date opstartDatumDossier;
+
+}

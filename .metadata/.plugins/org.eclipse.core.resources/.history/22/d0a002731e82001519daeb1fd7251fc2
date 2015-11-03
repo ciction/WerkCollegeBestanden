@@ -1,0 +1,17 @@
+package werkCollege6;
+
+import java.util.Date;
+
+public class Passagier {
+	private String naam;
+	private Date opstartDatumDossier;
+	
+	public Passagier(String naam, Date opstartDatumDossier) {
+		super();
+		this.naam = naam;
+		this.opstartDatumDossier = opstartDatumDossier;
+	}
+	
+	
+
+}

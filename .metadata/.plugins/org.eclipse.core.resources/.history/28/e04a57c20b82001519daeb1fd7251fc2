@@ -1,0 +1,62 @@
+package SoftwareProject;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SpringLayout;
+
+public class ScrollableTest {
+
+	//entry point
+	public static void main(String args[]){
+		System.out.println("ScrollableTest start");
+		ScrollableTest test = new ScrollableTest();
+	}
+
+	//-------------------------------------------
+	
+	
+	
+	JFrame frame;
+	JScrollPane scroll;
+	JPanel panelInsideScrollPane;
+	
+	SpringLayout layout;
+	
+	//Constructor
+	public ScrollableTest() {
+		
+		//create window
+		createWindow()
+	    
+	   
+
+	    
+	    
+	    //show window
+	    frame.setVisible(true);
+		
+	}
+	public void createWindow(){
+		
+		frame = new JFrame("Test");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(500, 600);
+	}
+	
+	public void createPanels(){
+		 //create scrollpane
+	    scroll = new JScrollPane();
+	    
+	    //create  panel with spring layout(for inside the scrollpane)
+	    panelInsideScrollPane = new JPanel();
+	    layout = new SpringLayout();
+		panelInsideScrollPane.setLayout(layout);
+	    
+		//add panel to the scrollpane
+		scroll.setViewportView(panelInsideScrollPane);
+		
+	    //add scrollpane to window
+		frame.add(scroll);
+	}
+}

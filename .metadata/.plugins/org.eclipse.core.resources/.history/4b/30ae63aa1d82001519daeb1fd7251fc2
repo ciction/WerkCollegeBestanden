@@ -1,0 +1,5 @@
+package werkCollege6;
+
+public class Business_Passagier extends Passagier {
+
+}
