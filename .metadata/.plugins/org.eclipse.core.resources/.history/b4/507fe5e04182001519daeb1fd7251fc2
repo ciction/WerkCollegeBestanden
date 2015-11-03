@@ -1,0 +1,46 @@
+package SoftwareProject;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.SpringLayout;
+
+public class CreateQuestionListener implements ActionListener {
+
+	ScrollableTest parentPanel;
+	
+	public CreateQuestionListener(ScrollableTest parentPanel) {
+		this.parentPanel = parentPanel;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("klik");
+		
+		//Create Question panel
+		JpanelTest newElement = new JpanelTest((int)parentPanel.getPanelInsideScrollPane().parentPanel.getPanelInsideScrollPane().getPreferredSize().getWidth());
+		parentPanel.getLayout().putConstraint(SpringLayout.NORTH, newElement,verticalMargin,SpringLayout.SOUTH, CalculateNextOffsetFromThisComponent);
+    	CalculateNextOffsetFromThisComponent = newElement;
+    	
+    	//Add Question Panel to the inner pannel (pannel within the scrollpane)
+       	panelInsideScrollPane.add(newElement);
+    	panelInsideScrollPane.validate();
+
+    	//Current preferred panel size
+    	int x = (int) panelInsideScrollPane.getPreferredSize().getWidth();
+    	int y = (int) panelInsideScrollPane.getPreferredSize().getHeight();
+    	
+    	
+    	//If next elements is outside preferred bounds --> grow pannel
+    	if((newElement.getLocation().y + (newElement.getHeight() * 2)) >= (buttonTest.getLocation().y - 60))
+    	{
+    		panelInsideScrollPane.setPreferredSize(new Dimension(x,y + newElement.getHeight() + verticalMargin));
+    	}
+    
+    	
+    	frame.pack();
+    	verticalScrollBar.setValue( verticalScrollBar.getMaximum() );
+    	
+		
+	}
+
+}

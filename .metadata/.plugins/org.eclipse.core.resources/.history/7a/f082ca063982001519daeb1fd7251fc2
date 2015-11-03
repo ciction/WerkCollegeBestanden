@@ -1,0 +1,54 @@
+package SoftwareProject;
+
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SpringLayout;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.DropMode;
+import javax.swing.JComboBox;
+
+public class JpanelTest extends JPanel {
+
+	SpringLayout layout; 
+	
+	public JpanelTest(int parrentWidth) {
+		layout = new SpringLayout();
+		this.setLayout(layout);
+		this.setPreferredSize(new Dimension(parrentWidth,100));
+		this.setBackground(Color.RED);
+
+		
+		JTextArea txtrTextAreaTest = new JTextArea();
+		txtrTextAreaTest.setPreferredSize(new Dimension(70,50));
+		txtrTextAreaTest.setLineWrap(true);
+		txtrTextAreaTest.setRows(5);
+		txtrTextAreaTest.setText("texojdjskgjkkjskdgkls;jgklsjgljslkajglksdjklgjsalgsalk;");
+    	
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, txtrTextAreaTest,0,SpringLayout.VERTICAL_CENTER, this);
+
+    	
+		this.add(txtrTextAreaTest);
+		
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setPreferredSize(new Dimension(70,50));
+		
+		layout.putConstraint(SpringLayout.VERTICAL_CENTER, comboBox,0,SpringLayout.VERTICAL_CENTER, this);
+    	layout.putConstraint(SpringLayout.WEST, comboBox,25,SpringLayout.EAST, txtrTextAreaTest);
+		this.add(comboBox);
+		
+		this.doLayout();
+
+
+		System.out.println(	txtrTextAreaTest.getBounds());
+		System.out.println(	comboBox.getBounds());
+		
+		this.repaint();
+
+
+	}
+
+}

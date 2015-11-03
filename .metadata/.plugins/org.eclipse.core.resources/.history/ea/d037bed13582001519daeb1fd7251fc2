@@ -1,0 +1,40 @@
+package SoftwareProject;
+
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SpringLayout;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.DropMode;
+import javax.swing.JComboBox;
+
+public class JpanelTest extends JPanel {
+
+	SpringLayout layout; 
+	
+	public JpanelTest() {
+		layout = new SpringLayout();
+		this.setLayout(layout);
+		this.setPreferredSize(new Dimension(100,50));
+
+		
+		JTextArea txtrTextAreaTest = new JTextArea();
+		txtrTextAreaTest.setLineWrap(true);
+		txtrTextAreaTest.setRows(5);
+		txtrTextAreaTest.setText("texojdjskgjkkjskdgkls;jgklsjgljslkajglksdjklgjsalgsalk;");
+		this.add(txtrTextAreaTest);
+		
+		
+		JComboBox comboBox = new JComboBox();
+		this.add(comboBox);
+		
+		this.doLayout();
+
+		System.out.println(	txtrTextAreaTest.getHeight());
+		
+
+
+	}
+
+}

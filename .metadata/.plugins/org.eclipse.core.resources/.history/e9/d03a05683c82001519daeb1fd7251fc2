@@ -1,0 +1,189 @@
+package SoftwareProject;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.SpringLayout;
+
+public class ScrollableTest {
+	
+	//Datamembers
+	//-------------------------
+	
+	//window
+	JFrame frame;	
+	//panels
+	JScrollPane myScrollPane;
+	JPanel panelInsideScrollPane;
+	//layout for panelInsideScrollPane
+	SpringLayout layout;
+	//components
+	JButton buttonTest;	
+	//used to store last created component;
+	JComponent CalculateNextOffsetFromThisComponent;
+	
+	JScrollBar verticalScrollBar;
+	
+	int verticalMargin = 5;
+
+	
+	
+	//----------------------------------------------------
+	
+	//Constructor
+	public ScrollableTest() {
+		
+		//create window
+		createWindow();
+		
+		//create panels
+		createPanels();
+		
+		//add first question panels
+		addUIQuestion();
+	    
+		//set size for the pannels
+		panelInsideScrollPane.setPreferredSize(new Dimension(300,300));
+		myScrollPane.setPreferredSize(new Dimension(300,400));
+		myScrollPane.
+	   
+		//add button
+		buttonTest = new JButton("add component");
+		panelInsideScrollPane.add(buttonTest);
+		
+		//place button bottom right
+		layout.putConstraint(SpringLayout.SOUTH, buttonTest,-25,SpringLayout.SOUTH, panelInsideScrollPane);
+		layout.putConstraint(SpringLayout.EAST, buttonTest,-25,SpringLayout.EAST, panelInsideScrollPane);
+
+		
+		//button interaction
+		buttonTest.addActionListener(new ActionListener() {
+			
+			//when clicked
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+/*				//create new label
+				JLabel newElement = new JLabel("Bla");
+            	layout.putConstraint(SpringLayout.NORTH, newElement,25,SpringLayout.NORTH, CalculateNextOffsetFromThisComponent);
+            	CalculateNextOffsetFromThisComponent = newElement;*/
+				
+				//create new panel
+				JpanelTest newElement = new JpanelTest((int)panelInsideScrollPane.getPreferredSize().getWidth());
+            	layout.putConstraint(SpringLayout.NORTH, newElement,verticalMargin,SpringLayout.SOUTH, CalculateNextOffsetFromThisComponent);
+            	CalculateNextOffsetFromThisComponent = newElement;
+            	
+            	
+            	
+            	//add label to the inner pannel (pannel within the scrollpane)
+               	panelInsideScrollPane.add(newElement);
+            	panelInsideScrollPane.validate();
+
+            	
+            	//resize if needed
+            	//debug numbers
+            	//System.out.println("bottom of new element = " + (newElement.getLocation().y + newElement.getHeight()));
+            	//System.out.println("top of button = " + buttonTest.getLocation().y);
+            	
+
+            	//current preferred panel size
+            	int x = (int) panelInsideScrollPane.getPreferredSize().getWidth();
+            	int y = (int) panelInsideScrollPane.getPreferredSize().getHeight();
+            	
+            	if(verticalScrollBar != null )System.out.println("scroll maximum vertical = " + verticalScrollBar.getMaximum());
+            	
+            	//if next elements is outside preferred bounds --> grow pannel
+            	if((newElement.getLocation().y + (newElement.getHeight() * 2)) >= (buttonTest.getLocation().y - 60))
+            	{
+            		panelInsideScrollPane.setPreferredSize(new Dimension(x,y + newElement.getHeight() + verticalMargin));
+            		if(verticalScrollBar == null ){
+            			verticalScrollBar = myScrollPane.getVerticalScrollBar();
+            		}
+            	}
+            
+            	
+            
+            	frame.pack();
+            	if(verticalScrollBar != null )System.out.println("scroll maximum vertical = " + verticalScrollBar.getMaximum());
+            	 
+            	
+            	if(verticalScrollBar != null ){
+        			verticalScrollBar.setValue( verticalScrollBar.getMaximum() );
+        		}
+			}
+		});
+
+		
+
+
+	    
+	    
+	    //show window
+		frame.pack();
+	    frame.setVisible(true);
+		
+		
+	}
+	public void createWindow(){
+		
+		frame = new JFrame("Test");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setSize(300, 400);
+	}
+	
+	public void createPanels(){
+		//create scrollpane
+	    myScrollPane = new JScrollPane();
+	    
+	    //create  panel with spring layout(for inside the scrollpane)
+	    panelInsideScrollPane = new JPanel();
+	    layout = new SpringLayout();
+		panelInsideScrollPane.setLayout(layout);
+	    
+		//add panel to the scrollpane
+		myScrollPane.setViewportView(panelInsideScrollPane);
+		JScrollBar verticalScrollBar = myScrollPane.getVerticalScrollBar();
+		myScrollPane.setVerticalScrollBar(verticalScrollBar);
+		myScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		
+	    //add scrollpane to window
+		frame.add(myScrollPane);
+		
+		
+	
+	}
+
+	public void addUIQuestion(){
+		//create a first question panel
+		
+		JpanelTest newElement = new JpanelTest(300);
+    	layout.putConstraint(SpringLayout.NORTH, newElement,5,SpringLayout.NORTH, panelInsideScrollPane);
+    	System.out.println("new element bounds =" + newElement.getBounds());
+   
+      	
+    	
+      	panelInsideScrollPane.add(newElement);
+      	panelInsideScrollPane.doLayout();
+      	
+
+      	System.out.println("new element bounds =" + newElement.getBounds());
+      	
+      	
+      	
+     	CalculateNextOffsetFromThisComponent = newElement;
+	}
+	
+	//entry point
+	public static void main(String args[]){
+		System.out.println("ScrollableTest start");
+		ScrollableTest test = new ScrollableTest();
+	}
+
+}
