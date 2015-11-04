@@ -1,0 +1,16 @@
+package SoftwareProject;
+
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+
+public class TestPanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public TestPanel() {
+		setLayout(new SpringLayout());
+
+	}
+
+}

@@ -12,12 +12,12 @@ import javax.swing.SpringLayout;
 public class CreateQuestionListener implements ActionListener {
 
 
-	private ScrollableTest parentPanel;
+	private Editor  parentPanel;
 	private JPanel panelInsideScrollPane;
 	private JButton buttonTest;
 	private int colorCounter;
 	
-	public CreateQuestionListener(ScrollableTest parentPanel) {
+	public CreateQuestionListener(Editor  parentPanel) {
 		this.parentPanel = parentPanel;
 		this.panelInsideScrollPane = parentPanel.getPanelInsideScrollPane();
 		this.buttonTest = parentPanel.getButtonTest();
@@ -33,7 +33,7 @@ public class CreateQuestionListener implements ActionListener {
 		parentPanel.setCurrentColor(parentPanel.getColors()[colorCounter]);
 				
 		//Create Question panel
-		JpanelTest newElement = new JpanelTest((int)panelInsideScrollPane.getPreferredSize().getWidth(), parentPanel.getCurrentColor());
+		Question  newElement = new Question((int)panelInsideScrollPane.getPreferredSize().getWidth(), parentPanel.getCurrentColor());
 		parentPanel.getLayout().putConstraint(SpringLayout.NORTH, newElement,parentPanel.getVerticalMargin(),SpringLayout.SOUTH, parentPanel.CalculateNextOffsetFromThisComponent);
 		parentPanel.CalculateNextOffsetFromThisComponent = newElement;
 		
